@@ -1,0 +1,282 @@
+<style>
+    .outer-container{
+        height: 93.8vh;
+    }
+    .container{
+        height: 100%;
+        display: flex;
+    }
+    .chart-container{
+        min-width: 800px;
+        width: 80%;
+        background-color:black;
+        padding: 20px;
+    }
+    .watchlist-container{
+        border-left: solid 0.1px  rgb(35, 35, 37);
+        width: 20%;
+        min-width: 250px;
+        text-align: center;
+        background-color:black;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        color:white;
+    }
+    .watchlist-searchbox{
+        display:flex;
+        width: 100%;
+        justify-content: center;
+        flex:0.1;
+    }
+    .watchlist-items{
+        flex: 0.8;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
+    .watchlist-pagination{
+        flex: 0.1;
+    }
+    .symbolDiv{
+        height: 8%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        width: 90%;
+        margin-left: 5%;
+        border-radius: 5px;
+        border-bottom: solid 0.2px rgb(35, 35, 37);
+
+    }
+    .symbolDiv:hover {
+        background-color:#333333;
+    }
+    .navbar{
+        height: 5.5vh;
+        background-color:black;
+        border-bottom: solid 0.1px  rgb(35, 35, 37);
+        color:white;
+
+    }
+    .navbar > span{
+        width: 15%;
+        display: flex;
+        align-items: center;
+    }
+    .filter-class{
+        display:flex;
+
+        color:white; 
+        width: 20%;
+        background-color:black;
+        height: 50px;
+    }
+    .filter-options{
+        flex: 0.2;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: solid 0.1px rgb(35, 35, 37);
+        cursor: pointer;
+    }
+    .filter-options:hover{
+        background-color:#333333;
+    }
+    .formClass{
+        width: 100%;
+        padding: 0px !important;
+        border: none !important;
+        text-align: center;
+    }
+
+    input{
+        background-color:white;
+        height: 4em;
+        border-radius: 5px;
+        width: 95%;
+        font-weight: 500;
+        color:black;
+    }
+    .prediction{
+        flex: 0.5;
+        height: 100px;
+        color: white;
+
+    }
+    .prediction-info{
+        color: white;
+        height: 100px;
+        display:flex;
+        justify-content: center;
+        margin-top: 50px;
+        align-items: center;
+        font-size: 20px;
+        font-weight: 700;
+    }
+    ::ng-deep mat-form-field-infex{
+        border: none !important;
+    }
+    ::ng-deep .mat-form-field-wrapper{
+        margin-bottom: 0px !important;
+    }
+    ::ng-deep .mat-form-field-appearance-fill .mat-form-field-infix{
+        padding: 0px !important;
+    }
+    ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex{
+        padding: 0px !important;
+        border-radius: 0;
+
+    }
+    ::ng-deep .mat-autocomplete-panel.mat-autocomplete-visible {
+        width: 95%;
+        margin-left: 2.5%;
+        background-color:#111111;
+    }
+    ::ng-deep .mat-option-text {
+        color:gray;
+    }
+    ::ng-deep .mat-checkbox-inner-container{
+        background-color:gray;
+    }
+    button{
+        height: 40px;
+        width: 100px;
+        cursor: pointer;
+    }
+    #canvas1{
+        border: solid 0.1px  rgb(35, 35, 37);
+        background-color:black;
+        max-height: 400px;
+        flex: 0.5 !important;
+        max-width: 50%;
+    }
+    #canvas{
+        background-color:black;
+        border: solid 0.1px rgb(35, 35, 37);
+        min-height: 600px;
+
+    }
+    table, th, td {
+        border: solid 0.1px rgb(35, 35, 37);
+    }
+    th{
+        text-align: center;
+        margin-right: 20px;
+        height: 40px;
+        min-width: 15vw;
+        padding-top: 20px;
+    }
+    td{
+        text-align: center;
+        margin-right: 20px;
+        min-width: 15vw;
+        height: 40px;
+    }
+</style>
+
+<div class="outer-container">
+    <div class="navbar">
+        <span>
+            <img src="assets/logo1.png" style="height: 50px; width: 50px;border-radius: 50px;">
+            Stock App
+        </span>
+    </div>
+    <mat-progress-bar mode="indeterminate" *ngIf="this.show_spinner"></mat-progress-bar>
+
+    <div class="container">
+
+        <div class="chart-container">
+            <div style="text-align: center; margin-bottom:2%;" *ngIf="this.show_prediction_button"><button (click)="seePredictions()">Predictions</button></div>
+            <div style="color : white; margin-bottom:2%; cursor: pointer; width: 100px;" *ngIf="this.show_back_arrow" (click)="backToChart()"><mat-icon>arrow_back_ios</mat-icon></div>
+            <div style="display: flex;">
+                <canvas id="canvas1">{{chart}}</canvas>
+                <div class="prediction" *ngIf="this.show_back_arrow">
+                    <div style="color:white;font-weight: 700; font-size: 32px;text-align: center; margin-bottom: 20px;">Moving Average Signals</div>
+                    <div style="display:flex; justify-content: center;">
+                        <table>
+                            <th>
+                                Moving Average
+                            </th>
+                            <th>
+                                Signal
+                            </th>
+                            <tr>
+                                <td>20</td>
+                                <td>{{this.moving_average_20_signal}}</td>
+                            </tr>
+                            <tr>
+                                <td>50</td>
+                                <td>{{this.moving_average_50_signal}}</td>
+                            </tr>
+                            <tr>
+                                <td>100</td>
+                                <td>{{this.moving_average_100_signal}}</td>
+                            </tr>
+                            <tr>
+                                <td>200</td>
+                                <td>{{this.moving_average_200_signal}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="prediction-info" *ngIf="this.show_back_arrow">
+                Last Closing Value is: 
+                {{ last_closing_price }}<br><br>
+                Predicted Value is: 
+                {{ predictedValue }}<br><br>             
+            </div>
+            <div  *ngIf="this.show_back_arrow" style="text-align: center;height: 100px; width: 100%;font-size:26px;font-weight: 700; display: flex; justify-content: center; align-items: center;">
+                <span style="color:white" *ngIf="predictedValue-last_closing_price>0">Signal: Buy <br> ROI: {{ roi }}%</span>
+                <span style="color:white;" *ngIf="last_closing_price-predictedValue>0">Signal: Sell <br> ROI: {{ roi }}%</span>
+            </div>
+            <div>
+                <canvas id="canvas">{{chart}}</canvas>
+              </div>
+            <div style="display: flex; justify-content: right;">
+                <div style="color: white; height: 50px;display:flex; align-items: center;margin-right:10%" *ngIf="this.show_filter==true">
+                    <mat-checkbox class="example-margin" [color]="colorObject" (change)="showMovingAverage($event)"
+                    [checked]="matboxChecked">Show moving averages</mat-checkbox>
+                  </div>
+                  <div class="filter-class" *ngIf="this.show_filter==true">
+                    <div class="filter-options" *ngFor="let option of filter_choices" (click)="filterData(option)">
+                        {{option}}
+                    </div>
+                  </div>
+                </div>
+        </div>
+        <div class="watchlist-container">
+            <div class="watchlist-searchbox">
+                <div style="width: 100%;">
+                    <form>
+                    <mat-form-field class="formClass" appearance="fill">
+                    <input type="text" placeholder="Search for a stock" matInput [formControl]="myControl" [matAutocomplete]="auto"
+                    [(ngModel)]="stockinputvalue">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="addStock(option.name)">
+                          {{option.name}}
+                        </mat-option>
+                      </mat-autocomplete>
+                      </mat-form-field>
+                    </form>
+                </div>
+                <!-- <div style="width: 7%; padding-top: 10px;">
+                    <mat-icon style="transform: scale(1.5); cursor: pointer;" (click)="addSymbol()">add</mat-icon>
+                </div> -->
+            </div>
+            <div class="watchlist-items">
+                <div class="symbolDiv" *ngFor="let stock of default_watchlist" (click)="getStockData(stock.symbolName)">
+                    {{ stock.symbolName }}
+                </div>
+            </div>
+            <div class="watchlist-pagination">
+    
+            </div>
+    
+        </div>
+    
+    </div>
+</div>
