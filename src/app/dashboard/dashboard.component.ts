@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Chart, registerables } from 'chart.js';
+import { Chart, registerables, Tooltip  } from 'chart.js';
 import { Observable, reduce, withLatestFrom } from 'rxjs';
 import { GetDataService } from 'src/services/get-data.service';
 import {FormControl} from '@angular/forms';
@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
   
 
   //variables for prediction charts
-  roi = ''
+  roi = 0
   actual_values: any;
   last_closing_price = 0;
   predicted_values_number:number[] = []
@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
   date_array:string[] = []
   stock_data: any;
   first_prediction_chart = true;
-  predictedValue: any;
+  predictedValue = 0;
   first_chart = true
   watchlist : string[]= []
   default_watchlist = [{symbolName : "RELIANCE"},{symbolName : "DMART"},{symbolName : "IGL"}]
@@ -66,6 +66,7 @@ export class DashboardComponent implements OnInit {
   constructor(private getData: GetDataService,
     private httpClient: HttpClient) { 
     Chart.register(...registerables);
+    Chart.register([Tooltip])
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => {
@@ -322,6 +323,14 @@ export class DashboardComponent implements OnInit {
   addSymbol(){
  
   }
+  getDecimals(value:any){
+      let buffer = value.toString()
+      let buffer1 = buffer.split('.')
+      let decimalBuffer = buffer1[1].slice(0,2)
+      let finalValue = buffer1[0] +'.'+ decimalBuffer
+      let y:number = +finalValue
+      return y;
+  }
   seePredictions(){
     if(this.first_prediction_chart == false){
       this.destroyChart1()
@@ -338,22 +347,18 @@ export class DashboardComponent implements OnInit {
     this.predicted_values_number = []
     this.labelArr = []
     this.getData.getModelData(data).subscribe((response: any)=>{
-      let buffer = response.predicted_price[0].toString()
-      let buffer1 = buffer.split('.')
-      let decimalBuffer = buffer1[1].slice(0,2)
-      let finalValue = buffer1[0] +'.'+ decimalBuffer
-      this.predictedValue = finalValue
+      // let buffer = response.predicted_price[0].toString()
+      // let buffer1 = buffer.split('.')
+      // let decimalBuffer = buffer1[1].slice(0,2)
+      // let finalValue = buffer1[0] +'.'+ decimalBuffer
+      // this.predictedValue = finalValue
+      this.predictedValue = this.getDecimals(response.predicted_price[0])
       let response_data = response.response
       this.actual_values = response_data['actual']
-      this.last_closing_price = this.actual_values[this.actual_values.length-1]
+      this.last_closing_price = this.getDecimals(this.actual_values[this.actual_values.length-1])
       this.predicted_values = response_data['predicted']
-      let roi_buffer = Math.abs((this.predictedValue-this.last_closing_price)/this.last_closing_price)
-      let buffer2 = roi_buffer.toString().split('.')
-      console.log("buffer 2: ", buffer2)
-      let decimalBuffer1 = buffer2[1].slice(0,2)
-      let finalValue1 = buffer2[0] +'.'+ decimalBuffer1
-      this.roi = finalValue1
-      this.predictedValue = finalValue
+      let buffer_roi = Math.abs((this.predictedValue-this.last_closing_price)/this.last_closing_price) * 100
+      this.roi = this.getDecimals(buffer_roi)
       //get moving average signals
       let sum1 = 0
       for(let i = (this.actual_values.length - 20); i< this.actual_values.length;i++){
@@ -411,16 +416,15 @@ export class DashboardComponent implements OnInit {
         this.predicted_values_number.push(bufferArr[0])
       }
       console.log("predicted values nbmer are: ", this.predicted_values_number)
-      for(let i = 0; i< this.predicted_values.length; i++){
-        this.labelArr.push(i)
-      }
+      let labelArr2 = []
+      labelArr2 = this.date_array.slice(this.date_array.length-140, this.date_array.length)
       document.getElementById("canvas1")!.style.display = "block";
 
       console.log("actual values are: ",this.actual_values)
       this.chart1 = new Chart('canvas1', {
         type: 'line',
         data: {
-          labels : this.labelArr,
+          labels : labelArr2,
           datasets: [
             {
               fill: true,

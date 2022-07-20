@@ -1,0 +1,13 @@
+.prediction30-container{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    height: 92vh;
+}
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: rgb(56, 54, 54);
+    }
+    .during-load{
+        height: 75vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }

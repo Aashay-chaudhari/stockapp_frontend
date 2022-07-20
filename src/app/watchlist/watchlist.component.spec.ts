@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChartTestComponent } from './chart-test.component';
+import { WatchlistComponent } from './watchlist.component';
 
-describe('ChartTestComponent', () => {
-  let component: ChartTestComponent;
-  let fixture: ComponentFixture<ChartTestComponent>;
+describe('WatchlistComponent', () => {
+  let component: WatchlistComponent;
+  let fixture: ComponentFixture<WatchlistComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChartTestComponent ]
+      declarations: [ WatchlistComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ChartTestComponent);
+    fixture = TestBed.createComponent(WatchlistComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

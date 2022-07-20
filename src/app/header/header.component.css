@@ -1,0 +1,15 @@
+.header-container{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    align-items: center;
+    height: 8vh;
+    padding-left: 10vw;
+    justify-content: start;
+}
+.app-title{
+    margin-left:1.5vw;
+    font-size: 24px;
+}
+.img{
+    margin-left: 10%;
+}

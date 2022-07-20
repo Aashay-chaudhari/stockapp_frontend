@@ -1,0 +1,27 @@
+<div class="chart-container">
+    <mat-progress-bar mode="indeterminate" *ngIf="this.show_spinner"></mat-progress-bar>
+
+    <div class="buttons-container"  *ngIf="show_chart">
+        <button (click)="predict()">Tomorrow's Forecast</button>
+        <button (click)="predict30()">30 Day Forecast</button>
+    </div>
+    <!-- <div class="information" *ngIf="!show_chart">
+        Info
+    </div> -->
+    <div *ngIf="show_chart">
+        <canvas id="canvas" height="250" width="400">{{chart}}</canvas>
+    </div>
+    <div class="option-container" *ngIf="show_filter">
+    <div class="TBD">TBD</div>
+
+    <div class="moving-averages">
+        <mat-checkbox (change)="showMovingAverage($event)"
+        [checked]="matboxChecked">Show Moving Averages</mat-checkbox>
+    </div>
+    <div class="filter-container">
+        <div class="filter-options" *ngFor="let option of filter_choices" (click)="filterData(option)">
+            {{option}}
+        </div>
+    </div>
+  </div>
+</div>

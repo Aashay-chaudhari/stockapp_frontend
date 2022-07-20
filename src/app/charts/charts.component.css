@@ -1,0 +1,86 @@
+.chart-container{
+    height: 92vh;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
+#canvas{
+    width: 90% !important;
+    margin-left: 5%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-top: 2.5%;
+}
+.buttons-container{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 2%;
+}
+.buttons-container > button {
+    height: 35px;
+    width: 200px;
+    background-color: white;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    
+    cursor: pointer;
+    border-radius: 5px;
+}
+.buttons-container > button:hover{
+    background-color: rgb(238, 235, 235);
+
+}
+.filter-options{
+    flex: 0.2;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.filter-options:hover{
+    background-color: rgb(238, 235, 235);
+}
+.option-container{
+    margin-top:1%;
+    display:flex;
+    height: 50px;
+    width: 90%;
+    margin-left: 5%;
+}
+.TBD{
+    flex: 0.375;
+}
+.moving-averages{
+    flex: 0.375;
+}
+.filter-container{
+    flex: 0.25;
+    display:flex;
+}
+.filter-container > .filter-options {
+    margin-left: 5px;
+}
+.moving-averages{
+    display:flex;
+    align-items: center;
+}
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    opacity: 0.03 !important;
+    background-color: rgb(129, 128, 128);
+
+  }
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: rgb(129, 128, 128);
+
+  }
+  ::ng-deep .mat-dialog-container {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  }
+.information{
+    width: 90%;
+    padding-top: 5%;
+    font-size: 20px;
+    margin-left: 5%;
+}

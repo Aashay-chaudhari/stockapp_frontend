@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChartTestComponent } from './chart-test/chart-test.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
@@ -16,7 +16,7 @@ const routes: Routes = [
 		path: 'dashboard', component: DashboardComponent,
 	},
 	{
-		path: 'chart', component: ChartTestComponent,
+		path: 'home', component: HomeComponent,
 	},
 ];
 

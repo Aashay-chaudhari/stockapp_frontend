@@ -1,0 +1,40 @@
+<style>
+    .prediction-output-container{
+        display: flex;
+    }
+    .navbar{
+        height: 7vh;
+        background-color: red;
+        display:flex;
+        align-items: center;
+        padding-left: 4%;
+    }
+    .chart-container{
+        width: 50%;
+    }
+    .signal-container{
+        width: 50%;
+    }
+</style>
+
+<div class="prediction-container">
+    <div class="navbar">
+        <mat-icon>arrow_back_ios</mat-icon>
+    </div>
+    <div class="prediction-output-container">
+        <div class="chart-container">
+            <canvas id="canvas">{{chart}}</canvas>
+        </div>
+        <div class="signal-container">
+            Signals
+        </div>
+    </div>
+    <div class="prediction-text-container">
+        Last Closing Value is: 17895.19
+
+        Predicted Value is: 4396.48
+
+        Signal : Sell
+        ROI : 75.43%
+    </div>
+</div>

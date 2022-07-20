@@ -108,7 +108,7 @@
     }
     .prediction-info{
         color: white;
-        height: 100px;
+        height: 80px;
         display:flex;
         justify-content: center;
         margin-top: 50px;
@@ -230,8 +230,8 @@
                 {{ predictedValue }}<br><br>             
             </div>
             <div  *ngIf="this.show_back_arrow" style="text-align: center;height: 100px; width: 100%;font-size:26px;font-weight: 700; display: flex; justify-content: center; align-items: center;">
-                <span style="color:white" *ngIf="predictedValue-last_closing_price>0">Signal: Buy <br> ROI: {{ roi }}%</span>
-                <span style="color:white;" *ngIf="last_closing_price-predictedValue>0">Signal: Sell <br> ROI: {{ roi }}%</span>
+                <div style="color:white;margin-top:1px;" *ngIf="predictedValue-last_closing_price>0">Signal : Buy <br><div style="margin-top:20px;"> ROI : {{ roi }}%</div></div>
+                <div style="color:white;margin-top:1px;" *ngIf="last_closing_price-predictedValue>0">Signal : Sell <br><div style="margin-top:20px;"> ROI : {{ roi }}%</div></div>
             </div>
             <div>
                 <canvas id="canvas">{{chart}}</canvas>

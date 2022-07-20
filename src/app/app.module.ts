@@ -14,17 +14,33 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
+import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
+import { WatchlistComponent } from './watchlist/watchlist.component';
+import { ChartsComponent } from './charts/charts.component';
+import { PredictionComponent } from './prediction/prediction.component';
+import { Predict30Component } from './predict30/predict30.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { HelloComponent } from './charts/hello.component'
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     CreateUserComponent,
-    DashboardComponent
+    DashboardComponent,
+    HomeComponent,
+    HeaderComponent,
+    WatchlistComponent,
+    ChartsComponent,
+    PredictionComponent,
+    Predict30Component,
+    HelloComponent,
   ],
   imports: [
     BrowserModule,
+    
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -34,7 +50,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatProgressBarModule,
     MatAutocompleteModule,
     MatInputModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
