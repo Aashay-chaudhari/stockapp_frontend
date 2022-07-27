@@ -1,0 +1,39 @@
+
+    input{
+        background-color: white;
+    }
+    ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+        border-radius: 0px !important;
+        background-color: white;
+    }
+    ::ng-deep .mat-form-field-infix{
+        width: 15vw !important;
+    }
+    ::ng-deep .mat-form-field-underline {
+        bottom: 0px !important;
+    }
+
+    .watchlist-container     ::ng-deep .mat-form-field-wrapper  {
+        padding-bottom: 0px !important;
+    }
+    .watchlist-container{
+        padding-top: 1vh;
+        width: 100%;
+        height: 91vh;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+    
+    .symbolDiv{
+        height: 6%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin-left: 2.5%;
+        width: 95%;
+        border-radius: 5px;
+        border-bottom: solid 0.2px rgb(174, 174, 180);
+    }
+    .symbolDiv:hover{
+        background-color: rgb(238, 235, 235);
+    }

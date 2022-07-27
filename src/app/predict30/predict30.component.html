@@ -1,7 +1,12 @@
 <div class="prediction30-container">  
         <mat-progress-bar mode="indeterminate" *ngIf="this.show_spinner"></mat-progress-bar>
-
         <!-- <mat-spinner></mat-spinner> -->
-        <canvas id="canvas1" height="250" width="400">{{chart1}}</canvas>
-
+        <div class="chart-container">
+                <canvas id="canvas1" height="250" width="400">{{chart1}}</canvas>
+        </div>
+        <div class="chart-info" *ngIf="!this.show_spinner">
+                <div>Highest Closing Price: {{highest_closing_price}}, ROI : {{ROI_high}}%</div><br>
+                <div>Lowest Closing Price: {{lowest_closing_price}}, ROI : {{ROI_low}}%</div><br>
+                <div>Last Closing Price: {{last_closing_price}}</div><br>
+        </div>
 </div>

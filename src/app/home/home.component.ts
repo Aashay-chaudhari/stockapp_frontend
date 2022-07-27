@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { StoreDataService } from 'src/services/store-data.service';
 import { PredictionComponent } from '../prediction/prediction.component';
 
@@ -13,19 +14,32 @@ export class HomeComponent implements OnInit {
   show_predict = false;
   show_chart = false;
   show_info = true;
+  show_signals=false;
   show_predict30 = false;
-  constructor(private store_data : StoreDataService) {
+  constructor(private store_data : StoreDataService,
+    private router: Router) {
     localStorage.clear()
    }
-
+  
+   goToBuild(){
+    this.router.navigate(['/build']);
+    
+   }
   ngOnInit(): void {
-
+    this.store_data.reset_home.subscribe(response=>{
+      this.show_chart = false;
+      this.show_predict = false;
+      this.show_predict30 = false;
+      this.show_signals = false;
+      this.show_info = true;
+    })
     this.store_data.show_predictions.subscribe(response=>{
         this.show_predict = response;
         if(this.show_predict==true){
           this.show_chart =false
           this.show_info = false;
           this.show_predict30 = false;
+          this.show_signals = false;
         }
         // this.show_chart = false;
         // this.show_predict30 = false;
@@ -43,6 +57,7 @@ export class HomeComponent implements OnInit {
           this.show_chart =false
           this.show_info = false;
           this.show_predict = false;
+          this.show_signals = false;
         }
         // this.show_chart = false;
         // this.show_predict30 = false;
@@ -59,6 +74,16 @@ export class HomeComponent implements OnInit {
       this.show_predict = false;
       this.show_chart = true;
       this.show_info = false;
+      this.show_signals = false;
+    })
+    this.store_data.show_signal.subscribe(response=>{
+      this.show_signals = response
+      if(this.show_signals==true){
+        this.show_predict30 = false;
+        this.show_chart = false;
+        this.show_info = false;
+        this.show_signals = true;
+      }
     })
   }
 

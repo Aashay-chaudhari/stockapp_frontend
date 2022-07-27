@@ -9,16 +9,21 @@ export class StoreDataService {
   show_predictions30 = new Subject<boolean>();
   show_predictions = new Subject<boolean>();
   stock_searched = new Subject();
+  show_signal = new Subject<boolean>();
+  reset_home = new Subject<boolean>();
   updateStockSearched(stockSymbol: string){
     this.stock_searched.next(stockSymbol);
-    console.log("Inside updatestocksearched")
+  }
+  updateShowSignal(show: boolean){
+    this.show_signal.next(show);
+  }
+  updateResetHome(reset: boolean){
+    this.reset_home.next(reset);
   }
   updateShowPredicted(show: boolean){
-    console.log("Inside updateShowPredicted")
     this.show_predictions.next(show);
   }
   updateShowPredicted30(show: boolean){
-    console.log("Inside updateShowPredicted")
     this.show_predictions30.next(show);
   }
   constructor() { }

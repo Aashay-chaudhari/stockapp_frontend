@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
 import { Chart, registerables, Tooltip  } from 'chart.js';
 import { Observable, reduce, withLatestFrom } from 'rxjs';
 import { GetDataService } from 'src/services/get-data.service';

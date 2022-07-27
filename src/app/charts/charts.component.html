@@ -8,15 +8,25 @@
     <!-- <div class="information" *ngIf="!show_chart">
         Info
     </div> -->
-    <div *ngIf="show_chart">
+    <!-- <div *ngIf="show_chart">
         <canvas id="canvas" height="250" width="400">{{chart}}</canvas>
-    </div>
-    <div class="option-container" *ngIf="show_filter">
-    <div class="TBD">TBD</div>
+    </div> -->
+    <div id="chart1" *ngIf="if_loaded">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [xaxis]="chartOptions.xaxis"
+          [yaxis]="chartOptions.yaxis"
+          [title]="chartOptions.title"
+          [tooltip]="chartOptions.tooltip"
+        ></apx-chart>
+      </div>
+    <div class="option-container" *ngIf="if_loaded">
+    <div class="TBD"></div>
 
     <div class="moving-averages">
-        <mat-checkbox (change)="showMovingAverage($event)"
-        [checked]="matboxChecked">Show Moving Averages</mat-checkbox>
+        <!-- <mat-checkbox (change)="showMovingAverage($event)"
+        [checked]="matboxChecked">Show Moving Averages</mat-checkbox> -->
     </div>
     <div class="filter-container">
         <div class="filter-options" *ngFor="let option of filter_choices" (click)="filterData(option)">

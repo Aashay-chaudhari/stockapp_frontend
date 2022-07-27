@@ -12,11 +12,40 @@
 .prediction{
     flex: 85vw;
 }
-.info{
+.info-container{
     flex: 85vw;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.24);
+    padding: 30px;
+    padding-top: 50px;
+    display:flex;
+    justify-content: center;
+}
+.info{
+    width: 70%;
+    margin-left: 15%;
+    line-height: 2;
+    font-size: 18px;
 }
 .prediction30{
     flex: 85vw;
+}
+.showSignals{
+    flex: 85vw;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.24);
+}
+button {
+    height: 35px;
+    width: 200px;
+    background-color: white;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 600;
+}
+button:hover{
+    background-color: rgb(238, 235, 235);
+
 }

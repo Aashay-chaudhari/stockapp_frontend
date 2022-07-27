@@ -1,0 +1,38 @@
+.container{
+    width: 80%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-left: 10%;
+    height: 92vh;
+}
+::ng-deep .mat-form-field-infix{
+    width: 15vw !important;
+}
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+}
+.divForm{
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+
+button {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 40px;
+    padding-right: 40px;
+    
+    background-color: white;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 600;
+}
+button:hover{
+    background-color: rgb(238, 235, 235);
+
+}

@@ -2,17 +2,32 @@
     <app-header></app-header>
 </div>
 <div class="dashboard-watchlist-container">
-    <div class="info" [ngStyle]="{ 'display': show_info ? 'block' : 'none'}">
-        Info
+    <div class="info-container" [ngStyle]="{ 'display': show_info ? 'block' : 'none'}">
+        <div class="info">
+            Welcome friends,<br>
+            In this software, I have tried to provide users with various price predictions based on different Machine learning models.
+            If you're a day trader and are interested only in tomorrow's closing price of a stock, just click on a stock in the watchlist and 
+            start your journey. If you are a swing trader and would ike to see the predicted movement of a stock over a period of time, just 
+            click on 30 day forecast.<br><br>
+    
+            Hello fellow Enthusiasts,<br>
+            I have tried to give users the chance to understand what effects different hyperparameters have while training the data. So I 
+            have developed a <button (click)="goToBuild()">BUILD YOUR OWN!</button> , where you can create custom models.<br>
+            You can test these models over past data and get different statistics about your model. <br>
+            Have fun, if you have any constructive criticism, please mail to : aashaychaudhari@gmail.com
+        </div>
     </div>
     <div class="appCharts" [ngStyle]="{ 'display': show_chart ? 'block' : 'none'}">
         <app-charts></app-charts>
     </div>
-    <div class="prediction" *ngIf="show_predict">
+    <!-- <div class="prediction" *ngIf="show_predict">
         <app-prediction></app-prediction>
-    </div>
-    <div class="prediction30" [ngStyle]="{ 'display': show_predict30 ? 'block' : 'none'}">
+    </div> -->
+    <div class="prediction30" *ngIf="show_predict30">
         <app-predict30></app-predict30>
+    </div>
+    <div class="showSignals" *ngIf="show_signals">
+        <app-signals></app-signals>
     </div>
     <div class="app-watchlist">
         <app-watchlist></app-watchlist>

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { StoreDataService } from 'src/services/store-data.service';
 import { stock_options } from './stock_symbols';
-
+import { ChartsComponent } from '../charts/charts.component';
 export interface Stock {
   name: string;
 }
@@ -24,7 +24,8 @@ export class WatchlistComponent implements OnInit {
   //Default watchlist
   default_watchlist = [{symbolName : "RELIANCE"},{symbolName : "DMART"},{symbolName : "IGL"}]
 
-  constructor(private store_data: StoreDataService) {
+  constructor(private store_data: StoreDataService,
+    private chartComponent: ChartsComponent) {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => {
@@ -65,7 +66,9 @@ export class WatchlistComponent implements OnInit {
     return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
   }
   async getStockData(symbolName: any){
+    localStorage.clear()
     console.log("Symbol name is: ", symbolName)
     this.store_data.updateStockSearched(symbolName);
+    localStorage.setItem('stock', symbolName)
   }
 }

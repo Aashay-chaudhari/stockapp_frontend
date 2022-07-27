@@ -1,0 +1,49 @@
+<div>
+    <app-header></app-header>
+</div>
+<div class="container">
+    <form [formGroup]="hyperParameters">
+      <div class="divForm" style="display: flex; height: 15vh;">
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Learning Rate</mat-label>
+            <input matInput placeholder="0.01" formControlName="learning_rate">
+            <mat-icon matSuffix>help</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+    </div>
+    <div>
+  <mat-form-field appearance="outline">
+    <mat-label>Batch Size</mat-label>
+    <input matInput placeholder="64" formControlName="batch_size">
+    <mat-icon matSuffix>help</mat-icon>
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+    </div>
+    <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Optimizer</mat-label>
+            <input matInput placeholder="Adam" formControlName="optimizer">
+            <mat-icon matSuffix>help</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+    </div>
+    <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Epochs</mat-label>
+            <input matInput placeholder="50" formControlName="epochs">
+            <mat-icon matSuffix>help</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+    </div>
+  </div>
+
+    <div class="buttonContainer">
+      <button type="submit">Build</button>
+
+    </div>
+      
+
+      </form>
+
+</div>

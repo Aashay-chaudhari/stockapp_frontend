@@ -23,6 +23,10 @@ import { Predict30Component } from './predict30/predict30.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { HelloComponent } from './charts/hello.component'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SignalsComponent } from './signals/signals.component';
+import { BuildComponent } from './build/build.component';
+import { CheckComponent } from './check/check.component';
+import { NgApexchartsModule } from "ng-apexcharts";
 
 @NgModule({
   declarations: [
@@ -37,10 +41,13 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     PredictionComponent,
     Predict30Component,
     HelloComponent,
+    SignalsComponent,
+    BuildComponent,
+    CheckComponent,
   ],
   imports: [
     BrowserModule,
-    
+    NgApexchartsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,

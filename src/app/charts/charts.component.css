@@ -1,6 +1,7 @@
 .chart-container{
     height: 92vh;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.24);
 
 }
 #canvas{
@@ -13,6 +14,7 @@
     display: flex;
     justify-content: space-around;
     padding-top: 2%;
+    padding-bottom: 2%;
 }
 .buttons-container > button {
     height: 35px;
@@ -20,9 +22,9 @@
     background-color: white;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    
     cursor: pointer;
     border-radius: 5px;
+    font-weight: 600;
 }
 .buttons-container > button:hover{
     background-color: rgb(238, 235, 235);

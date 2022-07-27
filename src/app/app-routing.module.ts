@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BuildComponent } from './build/build.component';
+import { CheckComponent } from './check/check.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
@@ -9,6 +11,9 @@ const routes: Routes = [
   {
 		path: '', component: LoginComponent,
 	},
+	{
+		path: 'check', component: CheckComponent,
+	},
   {
 		path: 'createUser', component: CreateUserComponent,
 	},
@@ -17,6 +22,9 @@ const routes: Routes = [
 	},
 	{
 		path: 'home', component: HomeComponent,
+	},
+	{
+		path: 'build', component: BuildComponent,
 	},
 ];
 

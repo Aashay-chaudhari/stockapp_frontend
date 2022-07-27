@@ -1,28 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { GetDataService } from 'src/services/get-data.service';
 import { StoreDataService } from 'src/services/store-data.service';
 import { HelloComponent } from './hello.component';
 import { Predict30Component } from '../predict30/predict30.component';
+import {ChartComponent,ApexAxisChartSeries,ApexChart,ApexYAxis,ApexXAxis,ApexTitleSubtitle} from "ng-apexcharts";
+
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  yaxis: ApexYAxis;
+  title: ApexTitleSubtitle;
+};
 
 @Component({
   selector: 'app-charts',
   templateUrl: './charts.component.html',
   styleUrls: ['./charts.component.css']
 })
+@Injectable({
+  providedIn: "root"
+})
 export class ChartsComponent implements OnInit {
+  if_loaded = false;
+  @ViewChild("chart") chart1?: ChartComponent;
+  public chartOptions: Partial<ChartOptions> | any;
   show_chart = false;
+  chart_data_array:any = []
   show_spinner = false;
   stock_symbol: any;
   chart: any = [];
   first_chart = true;
   stock_data: any;
   close_price_array = []
+  open_price_array = []
+  low_price_array = []
+  high_price_array = []
   date_string_array:string[] = []
   volume_array = []
   date_array:any = []
   filtered_close_price_array = []
+  filtered_open_price_array = []
+  filtered_low_price_array = []
+  filtered_high_price_array = []
   filtered_date_string_array:string[] = []
   filtered_volume_array = []
   filtered_date_array:any = []
@@ -45,6 +67,7 @@ export class ChartsComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    console.log("Window height is: ", window.innerHeight)
     this.show_chart =true;
     console.log("Inside ngoninit charts")
     this.store_data.stock_searched.subscribe(response=>{
@@ -67,63 +90,185 @@ export class ChartsComponent implements OnInit {
 
   }
   filterData(option:any){
+    let height_of_chart = 0;
+    if(window.innerHeight>900){
+      height_of_chart = 700
+    }else{
+      height_of_chart = 500
+    }
     this.matboxChecked = false;
     console.log("optionsi s: ",option)
+    this.chart_data_array = []
+    if(option=='All'){
+      option = 0;
+    }
+    console.log("Date array is: ", this.date_array)
     this.filtered_date_array = this.date_array.slice(this.date_array.length-option,this.date_array.length)
     this.filtered_close_price_array = this.close_price_array.slice(this.close_price_array.length-option,this.close_price_array.length)
+    this.filtered_open_price_array = this.open_price_array.slice(this.open_price_array.length-option,this.open_price_array.length)
+    this.filtered_high_price_array = this.high_price_array.slice(this.high_price_array.length-option,this.high_price_array.length)
+    this.filtered_low_price_array= this.low_price_array.slice(this.low_price_array.length-option,this.low_price_array.length)
+    console.log("this.filtered_date_array",this.filtered_date_array)
+    console.log("this.filtered_close_price_array",this.filtered_close_price_array)
     let pointerRadius = 0;
-    this.destroyChart()
+    let filter_dates = []
+    if(option==0){
+        for(let i=0; i<this.date_array.length; i++){
+         filter_dates.push(this.date_array[i])
+        }
+    }else{
+      for(let i=0;i<option;i++){
+        filter_dates.push(this.date_array[this.date_array.length-option+i])
+      }
+    }
+    if(option==0){
+      for(let i=0;i<this.close_price_array.length; i++){
+        let ohlc:any = []
+        // let open1 = this.stock_data['Open']
+        // let open = open1.slice(open1.length-option, open1.length)
+        // console.log("open slice is: 0,", open.slice(open.length-option+i, open.length))
+        // let high1 = this.stock_data['High']
+        // let high = high1.slice(open1.length-option+i, open1.length)
+        // let low1 = this.stock_data['Low']
+        // let low = low1.slice(open1.length-option+i, open1.length)
+        // let close1 = this.stock_data['Close']
+        // let close = close1.slice(open1.length-option+i, open1.length)
+        ohlc.push(this.open_price_array[i])
+        ohlc.push(this.high_price_array[i])
+        ohlc.push(this.low_price_array[i])
+        ohlc.push(this.close_price_array[i])
+  
+        let js_object = { 
+          x: filter_dates[i],
+          y: ohlc
+        }
+        this.chart_data_array.push(js_object)
+      }
+      console.log("Chart data in all is: ", this.chart_data_array)
+    }else{
+      for(let i=0;i<option; i++){
+        let ohlc:any = []
+        // let open1 = this.stock_data['Open']
+        // let open = open1.slice(open1.length-option, open1.length)
+        // console.log("open slice is: 0,", open.slice(open.length-option+i, open.length))
+        // let high1 = this.stock_data['High']
+        // let high = high1.slice(open1.length-option+i, open1.length)
+        // let low1 = this.stock_data['Low']
+        // let low = low1.slice(open1.length-option+i, open1.length)
+        // let close1 = this.stock_data['Close']
+        // let close = close1.slice(open1.length-option+i, open1.length)
+        ohlc.push(this.filtered_open_price_array[i])
+        ohlc.push(this.filtered_high_price_array[i])
+        ohlc.push(this.filtered_low_price_array[i])
+        ohlc.push(this.filtered_close_price_array[i])
+  
+        let js_object = {
+          x: filter_dates[i],
+          y: ohlc
+        }
+        this.chart_data_array.push(js_object)
+      }
+    }
+    //this.destroyChart()
     if(option<=60){
       pointerRadius = 5;
     }
-    this.chart = new Chart('canvas', {
-      type: 'line',
-      data: {
-        labels: this.filtered_date_array,
-        datasets: [
-
-          {
-            fill: true,
-            pointRadius: pointerRadius,
-            label: 'Close Price',
-            data: this.filtered_close_price_array,
-            borderColor: 'darkgray',
-            stack: 'combined'
-
-          }
-        ]
+    this.chartOptions = {
+      series: [
+        {
+          name: "candle",
+          data: this.chart_data_array   
+        }
+      ],
+      chart: {
+        type: "candlestick",
+        height: height_of_chart
       },
-      options:{
-
-        scales:{
-
+      grid:{
+        show:true,
+      },
+      title: {
+        text: this.stock_symbol,
+        align: "center",
+        style: {
+          fontSize:  '18PX',
+          fontWeight:  'bold',
         },
-        plugins: {
-          title: {
-            font: {
-              size: 25,
-              
-            },
-            display: true,
-            text: this.stock_symbol,
-          },
-          tooltip : {
-            enabled: true,
+      },
+      xaxis: {
+        type: "datetime"
+      },
+      yaxis: {
+        labels: {
+          formatter: function(val: number) {
+            let label = val.toString()
+            let labelArr = label.split('.')
+            let value_to_store = labelArr[0]
+            return value_to_store;
           }
         },
-        elements: {
-          point: {
 
-          }
-        },
+      },
+      tooltip: {
+        shared: false,
+
+        intersect: true,
       }
-    })
+    };
+    // this.chart = new Chart('canvas', {
+    //   type: 'line',
+    //   data: {
+    //     labels: this.filtered_date_array,
+    //     datasets: [
+
+    //       {
+    //         pointRadius: pointerRadius,
+    //         label: 'Close Price',
+    //         data: this.filtered_close_price_array,
+    //         borderColor: 'black',
+    //         stack: 'combined'
+
+    //       }
+    //     ]
+    //   },
+    //   options:{
+
+    //     scales:{
+
+    //     },
+    //     plugins: {
+    //       title: {
+    //         font: {
+    //           size: 25,
+              
+    //         },
+    //         display: true,
+    //         text: this.stock_symbol,
+    //       },
+    //       tooltip : {
+    //         enabled: true,
+    //       }
+    //     },
+    //     elements: {
+    //       point: {
+
+    //       }
+    //     },
+    //   }
+    // })
   }
   populateChart(symbolName: string){
+    let height_of_chart = 0;
+    if(window.innerHeight>900){
+      height_of_chart = 700
+    }else{
+      height_of_chart = 500
+    }
+    this.chart_data_array = []
     this.show_spinner = true;
     this.matboxChecked = false;
     if(this.first_chart == false){
-      this.destroyChart()
+      //this.destroyChart()
     }
     this.matDialog.closeAll()
     let data = {
@@ -132,73 +277,141 @@ export class ChartsComponent implements OnInit {
     this.date_array = []
 
       this.get_data.getStockData(data).subscribe(response=>{
-    this.show_spinner = false;
-
+      this.show_spinner = false;
+        
       this.show_chart = true;
-      console.log("first chart value from populate chart: ", this.first_chart)
-        console.log("Inside getstockdata ")
         this.stock_data = response;
         this.close_price_array = this.stock_data['Close']
+        this.open_price_array = this.stock_data['Open']
+        this.low_price_array = this.stock_data['Low']
+        this.high_price_array = this.stock_data['High']
+
         this.volume_array = this.stock_data['Volume']
         this.date_string_array = this.stock_data['Date']
         for(let i=0;i < this.date_string_array.length; i++){
           let bufferDate = this.date_string_array[i].split("T")
           this.date_array[i] = bufferDate[0];
         }
+        let open1 = this.stock_data['Open']
+        let open = open1.slice(this.stock_data['Open'].length-180, open1.length)
+        let high1 = this.stock_data['High']
+        let high = high1.slice(this.stock_data['High'].length-180, this.stock_data['High'].length)
+        let low1 = this.stock_data['Low']
+        let low = low1.slice(this.stock_data['Low'].length-180, this.stock_data['Low'].length)
+        let close1 = this.stock_data['Close']
+        let close = close1.slice(this.stock_data['Close'].length-180, this.stock_data['Close'].length)
+        let filter_dates = []
+        for(let i=0;i<180;i++){
+          filter_dates.push(this.date_array[this.date_array.length-180+i])
+        }
+        for(let i=0;i<180; i++){
+          let ohlc = []
+          ohlc.push(open[i])
+          ohlc.push(high[i])
+          ohlc.push(low[i])
+          ohlc.push(close[i])
+          let js_object = {
+            x: filter_dates[i],
+            y: ohlc
+          }
+          this.chart_data_array.push(js_object)
+        }
+        console.log("Chart data data is : ", this.chart_data_array)
         this.filtered_date_array = this.date_array
         this.filtered_close_price_array = this.close_price_array
+        this.filtered_low_price_array = this.low_price_array
+        this.filtered_high_price_array = this.high_price_array
+        this.filtered_open_price_array = this.open_price_array
         if(this.first_chart == false){
           console.log("Inside destroy chart of populate chart")
-          this.destroyChart()
+          //this.destroyChart()
         }
-        this.chart = new Chart('canvas', {
-          type: 'line',          
-          data: {      
-            labels: this.date_array,
-            datasets: [
-  
-              {
-                fill: true,
-                pointRadius: 0,
-                label: 'Close Price',
-                data: this.close_price_array,
-                borderColor: 'darkgray',
-                stack: 'combined'
-  
-              }
-            ]
+        this.chartOptions = {
+          series: [
+            {
+              name: "candle",
+              data: this.chart_data_array   
+            }
+          ],
+          chart: {
+            type: "candlestick",
+            height: height_of_chart
           },
-          options:{
+          title: {
+            text: this.stock_symbol,
+            align: "center",
+            style: {
+              fontSize:  '18PX',
+              fontWeight:  'bold',
+            },
+          },
+          xaxis: {
+            type: "datetime"
+          },
+          yaxis: {
+            labels: {
+              formatter: function(val: number) {
+                let label = val.toString()
+                let labelArr = label.split('.')
+                let value_to_store = labelArr[0]
+                return value_to_store;
+              }
+            },
+          },
+          tooltip: {
+            shared: false,
 
-            scales:{
-  
-            },
-            plugins: {
-              legend: {
-              },
-              title: {
-                font: {
-                  size: 25,
-                  
-                },
-                display: true,
-                text: this.stock_symbol,
-              },
-              tooltip : {
-                enabled: true
-              }
-            },
-            elements: {
-              point: {
-  
-              }
-            },
+            intersect: true,
           }
-        })
+
+        };
+        // this.chart = new Chart('canvas', {
+        //   type: 'line',          
+        //   data: {      
+        //     labels: this.date_array,
+        //     datasets: [
+  
+        //       {
+        //         pointRadius: 0,
+        //         label: 'Close Price',
+        //         data: this.close_price_array,
+        //         borderColor: 'black',
+        //         stack: 'combined'
+  
+        //       }
+        //     ]
+        //   },
+        //   options:{
+
+        //     scales:{
+  
+        //     },
+        //     plugins: {
+        //       legend: {
+        //       },
+        //       title: {
+        //         font: {
+        //           size: 25,
+                  
+        //         },
+        //         display: true,
+        //         text: this.stock_symbol,
+        //       },
+        //       tooltip : {
+        //         enabled: true
+        //       }
+        //     },
+        //     elements: {
+        //       point: {
+  
+        //       }
+        //     },
+        //   }
+        // })
       this.show_filter = true;
       console.log("Setting value of first_chart to false;")
       this.first_chart = false;
-        
+      this.if_loaded = true;
       })
   }
 
@@ -275,42 +488,37 @@ export class ChartsComponent implements OnInit {
       console.log("moving_avg_100: ", moving_avg_100)
       console.log("moving_avg_50: ", moving_avg_50)
       console.log("moving_avg_20: ", moving_avg_20)
-      this.destroyChart()
+      // this.destroyChart()
       this.chart = new Chart('canvas', {
         type: 'line',
         data: {
           labels : this.filtered_date_array,
           datasets: [
             {
-              fill: true,
               pointRadius: 0,
               label: 'Moving Average 200',
               data: moving_avg_200,
               borderColor: 'red',
             },
             {
-              fill: true,
               pointRadius: 0,
               label: 'Moving Average 100',
               data: moving_avg_100,
               borderColor: 'green',
             },
             {
-              fill: true,
               pointRadius: 0,
               label: 'Moving Average 50',
               data: moving_avg_50,
               borderColor: 'blue',
             },
             {
-              fill: true,
               pointRadius: 0,
               label: 'Moving Average 20',
               data: moving_avg_20,
               borderColor: 'yellow',
             },
             {
-              fill: true,
               pointRadius: 0,
               label: 'Close Price',
               data: this.filtered_close_price_array,
@@ -389,9 +597,9 @@ export class ChartsComponent implements OnInit {
   predict30(){
     this.store_data.updateShowPredicted30(true)
     localStorage.setItem('stock_symbol', this.stock_symbol)
-    this.destroyChart()
+    // this.destroyChart()
     console.log("Inside predict30 and destroed the chart")
-    this.Predict30Component.ngOnInit()
+    //this.Predict30Component.ngOnInit()
   }
   getDecimals(value:any){
     console.log("Inside getDecimals")
