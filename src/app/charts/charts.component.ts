@@ -211,7 +211,7 @@ export class ChartsComponent implements OnInit {
       },
       tooltip: {
         shared: false,
-
+        enabled: true,
         intersect: true,
       }
     };
@@ -568,13 +568,13 @@ export class ChartsComponent implements OnInit {
       "symbol": this.stock_symbol
     }
     console.log("Inside predict")
-    this.get_data.getModelData(data).subscribe((response: any)=>{
+    this.get_data.predict(data).subscribe((response: any)=>{
       this.show_spinner= false;
       console.log("data is: ", response)
       this.predicted_price = this.getDecimals(response.predicted_price[0])
       console.log("Predicted pric eis: ", this.predicted_price)
       this.last_closing_price = this.getDecimals(this.filtered_close_price_array[this.filtered_close_price_array.length-1])
-
+      
       console.log("last_closing_price eis: ", this.last_closing_price)
       this.matDialogRef = this.matDialog.open(HelloComponent, {
         data:{

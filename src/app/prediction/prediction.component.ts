@@ -34,7 +34,7 @@ export class PredictionComponent implements OnInit {
     let data= {
       "symbol": this.stock_symbol
     }
-    this.getData.getModelData(data).subscribe((response: any)=>{
+    this.getData.predict(data).subscribe((response: any)=>{
       // let buffer = response.predicted_price[0].toString()
       // let buffer1 = buffer.split('.')
       // let decimalBuffer = buffer1[1].slice(0,2)

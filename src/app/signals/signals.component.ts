@@ -133,7 +133,6 @@ export class SignalsComponent implements OnInit {
       this.moving_50_signal = this.getDecimals(this.moving_50_signal)
       this.moving_100_signal = this.getDecimals(this.moving_100_signal)
 
-      console.log("actual values are: ",this.actual_values)
       this.chart2 = new Chart('canvas2', {
         type: 'line',
         data: {

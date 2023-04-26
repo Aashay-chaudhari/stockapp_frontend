@@ -27,6 +27,7 @@ import { SignalsComponent } from './signals/signals.component';
 import { BuildComponent } from './build/build.component';
 import { CheckComponent } from './check/check.component';
 import { NgApexchartsModule } from "ng-apexcharts";
+import { CheckingComponent } from './checking/checking.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
     SignalsComponent,
     BuildComponent,
     CheckComponent,
+    CheckingComponent,
   ],
   imports: [
     BrowserModule,

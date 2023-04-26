@@ -1,0 +1,10 @@
+.app-watchlist{
+    flex:15vw;
+}
+.chart-container{
+    flex:85vw;
+}
+
+.page-container{
+    display: flex;
+}
