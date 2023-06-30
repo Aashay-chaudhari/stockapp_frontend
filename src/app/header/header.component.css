@@ -6,15 +6,15 @@
     padding-left: 10vw;
     justify-content: start;
 }
+#header-img{
+    cursor: pointer;
+}
 .app-title{
     margin-left:1.5vw;
     cursor: pointer;
     font-size: 24px;
 }
-.img{
-    cursor: pointer;
-    margin-left: 10%;
-}
+
 .header-buttons-container{
     padding-left: 45%;
     width: 30%;

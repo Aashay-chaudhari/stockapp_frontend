@@ -561,9 +561,6 @@ export class ChartsComponent implements OnInit {
   }
   predict(){
     this.show_spinner = true;
-    // this.store_data.updateShowPredicted(true)
-    // localStorage.setItem('stock_symbol', this.stock_symbol)
-    // this.destroyChart()
     let data= {
       "symbol": this.stock_symbol
     }
@@ -572,10 +569,9 @@ export class ChartsComponent implements OnInit {
       this.show_spinner= false;
       console.log("data is: ", response)
       this.predicted_price = this.getDecimals(response.predicted_price[0])
-      console.log("Predicted pric eis: ", this.predicted_price)
+      console.log("Predicted price is: ", this.predicted_price)
       this.last_closing_price = this.getDecimals(this.filtered_close_price_array[this.filtered_close_price_array.length-1])
-      
-      console.log("last_closing_price eis: ", this.last_closing_price)
+      console.log("last_closing_price is: ", this.last_closing_price)
       this.matDialogRef = this.matDialog.open(HelloComponent, {
         data:{
           last_close_price : this.last_closing_price,
@@ -602,9 +598,14 @@ export class ChartsComponent implements OnInit {
     //this.Predict30Component.ngOnInit()
   }
   getDecimals(value:any){
-    console.log("Inside getDecimals")
+    console.log("Inside getDecimals", value)
     let buffer = value.toString()
     let buffer1 = buffer.split('.')
+    console.log("buffer1 is: ", buffer1)
+    if(buffer1.length == 1 || buffer1[1].length < 2){
+      return value
+    }
+    let buffer1_len = buffer1[1].length
     let decimalBuffer = buffer1[1].slice(0,2)
     let finalValue = buffer1[0] +'.'+ decimalBuffer
     let y:number = +finalValue
