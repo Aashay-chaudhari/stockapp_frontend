@@ -13,7 +13,7 @@ import { ChartsComponent } from '../charts/charts.component';
 export class HeaderComponent implements OnInit {
   resetHome(){
     this.store_data.updateResetHome(true)
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
     this.chartsComponent.destroyChart()
   }
   constructor(private store_data : StoreDataService,
@@ -22,5 +22,13 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  goToAdvanced(){
+    console.log("Inside go to advanced")
+    this.router.navigate(['/advanced']);
+  }
+  goToBasic(){
+    this.store_data.updateResetHome(true)
+    this.router.navigate(['/']);
+    this.chartsComponent.destroyChart()
+  }
 }

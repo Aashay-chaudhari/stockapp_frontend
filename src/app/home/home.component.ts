@@ -27,11 +27,13 @@ export class HomeComponent implements OnInit {
    }
   ngOnInit(): void {
     this.store_data.reset_home.subscribe(response=>{
+      console.log("Inside reset home ngoninit home")
       this.show_chart = false;
       this.show_predict = false;
       this.show_predict30 = false;
       this.show_signals = false;
       this.show_info = true;
+      this.stateChange();
     })
     this.store_data.show_predictions.subscribe(response=>{
         this.show_predict = response;
@@ -86,6 +88,9 @@ export class HomeComponent implements OnInit {
       }
     })
   }
-
+  stateChange() {
+      setTimeout(() => 
+      window.location.reload(), 500);
+  }
 
 }

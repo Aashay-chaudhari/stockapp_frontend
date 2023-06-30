@@ -1,0 +1,19 @@
+
+<div class="watchlist-container">
+    <div class="options-container">
+        <mat-form-field class="formClass" appearance="fill">
+            <input type="text" placeholder="Search for a stock" matInput [formControl]="myControl" [matAutocomplete]="auto"
+            [(ngModel)]="stockinputvalue">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="addStock(option.name)">
+                  {{option.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+    </div>
+    <div class="symbolDiv" *ngFor="let stock of default_watchlist" (click)="getStockData(stock.symbolName)">
+        {{ stock.symbolName }}
+    </div>
+
+
+</div>

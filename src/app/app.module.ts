@@ -28,6 +28,8 @@ import { BuildComponent } from './build/build.component';
 import { CheckComponent } from './check/check.component';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { CheckingComponent } from './checking/checking.component';
+import { AdvancedChartingComponent } from './advanced-charting/advanced-charting.component';
+import { AdvancedWatchlistComponent } from './advanced-watchlist/advanced-watchlist.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { CheckingComponent } from './checking/checking.component';
     BuildComponent,
     CheckComponent,
     CheckingComponent,
+    AdvancedChartingComponent,
+    AdvancedWatchlistComponent,
   ],
   imports: [
     BrowserModule,

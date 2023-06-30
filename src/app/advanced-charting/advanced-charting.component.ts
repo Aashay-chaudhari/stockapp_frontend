@@ -8,11 +8,11 @@ import { StoreDataService } from 'src/services/store-data.service';
 declare const TradingView: any;
 
 @Component({
-  selector: 'app-checking',
-  templateUrl: './checking.component.html',
-  styleUrls: ['./checking.component.css']
+  selector: 'app-advanced-charting',
+  templateUrl: './advanced-charting.component.html',
+  styleUrls: ['./advanced-charting.component.css']
 })
-export class CheckingComponent implements OnInit {
+export class AdvancedChartingComponent implements OnInit {
   matDialogRef: any;
 
   constructor(private get_data : GetDataService,
@@ -22,30 +22,31 @@ export class CheckingComponent implements OnInit {
       Chart.register(...registerables);
       this.matDialogRef =  MatDialogRef<HelloComponent>;
      }
-  symbol = ''
+  symbol: any;
   show_spinner = false;
   predicted_price:any;
   last_closing_price: any;
 
   ngOnInit(): void {
-    this.symbol = 'NASDAQ:Goog'
-    this.load_chart()
+    this.load_chart("NASDAQ:TSLA")
+    this.store_data.stock_searched.subscribe(response=>{
+      this.symbol = response;
+      this.load_chart(this.symbol);
+    })
   }
-  change(){
-    console.log("Inside change")
-    this.symbol = 'NASDAQ:TSLA'
-    this.load_chart()
-  }
-  load_chart(){
+  // change(){
+  //   console.log("Inside change")
+  //   this.symbol = 'NASDAQ:TSLA'
+  //   this.load_chart()
+  // }
+  load_chart(symbol:string){
     console.log("Inside load_chart")
     console.log("screen height: ", screen)
     new TradingView.widget(
       {
       "width": screen.width - 700,
       "height": screen.height - 350,
-      // "width": 500,
-      // "height": 500,
-      "symbol": this.symbol,
+      "symbol": symbol,
       "timezone": "Etc/UTC",
       "interval": "D",
       "theme": "light",

@@ -2,7 +2,12 @@
   <app-header></app-header>
 </div>
 <div class="page-container">
+
   <div class="chart-container">
+      <div class="buttons-container">
+        <button (click)="predict()">Tomorrow's Forecast</button>
+        <button (click)="predict30()">30 Day Forecast</button>
+      </div>
       <div id="tradingview_bac65"></div>
       <div class="tradingview-widget-copyright"> </div>
       <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>

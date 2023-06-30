@@ -7,10 +7,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { CheckingComponent } from './checking/checking.component';
+import { AdvancedChartingComponent } from './advanced-charting/advanced-charting.component';
 
 const routes: Routes = [
   {
-		path: '', component: CheckingComponent,
+		path: '', component: HomeComponent,
 	},
 	{
 		path: 'check', component: CheckComponent,
@@ -22,7 +23,7 @@ const routes: Routes = [
 		path: 'dashboard', component: DashboardComponent,
 	},
 	{
-		path: 'home', component: HomeComponent,
+		path: 'advanced', component: AdvancedChartingComponent,
 	},
 	{
 		path: 'build', component: BuildComponent,
