@@ -3,18 +3,23 @@
 </div>
 <div class="dashboard-watchlist-container">
     <div class="info-container" [ngStyle]="{ 'display': show_info ? 'block' : 'none'}">
-        <div class="info">
-            Welcome friends,<br>
-            In this software, I have tried to provide users with various price predictions based on different Machine learning models.
-            If you're a day trader and are interested only in tomorrow's closing price of a stock, just click on a stock in the watchlist and 
-            start your journey. If you are a swing trader and would ike to see the predicted movement of a stock over a period of time, just 
-            click on 30 day forecast.<br><br>
-    
-            Hello fellow Enthusiasts,<br>
-            I have tried to give users the chance to understand what effects different hyperparameters have while training the data. So I 
-            have developed a <button (click)="goToBuild()">BUILD YOUR OWN!</button> , where you can create custom models.<br>
-            You can test these models over past data and get different statistics about your model. <br>
-            Have fun, if you have any constructive criticism, please mail to : aashaychaudhari@gmail.com
+        <div class="info" style="line-height: 1.5;font-size: 18px;">
+            Welcome to TradeSense! <br><br>
+            Are you a day trader seeking accurate predictions of tomorrow's closing prices for stocks? Look no further!
+             With TradeSense, you can select a stock from our watchlist and embark on your trading journey with confidence.<br><br>
+
+             We understand the power of historical data and the principle that "the past repeats itself." That's why we go 
+             beyond basic predictions and provide you with comprehensive charts showcasing all the price movements an asset has 
+             exhibited in the past. By analyzing these patterns and identifying similarities with the current movement, you can make more 
+             informed trading decisions.<br><br>
+             But that's not all! We believe in empowering our users with customization options. With our exclusive "BUILD YOUR OWN!" 
+             feature, you can create personalized machine learning models that align with your unique requirements. Explore different 
+             hyperparameters during the training process, test your models against historical data, and gain valuable insights and 
+             statistics to enhance your trading strategies.<br><br>
+             At TradeSense, we strive to make your trading experience enjoyable and educational. Unlock the power of machine learning and
+              take your trading to new heights with TradeSense. Start exploring our platform today and discover a world of possibilities!
+              <br><br>
+
         </div>
     </div>
     <div class="appCharts" [ngStyle]="{ 'display': show_chart ? 'block' : 'none'}">
