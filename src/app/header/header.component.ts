@@ -15,6 +15,8 @@ export class HeaderComponent implements OnInit {
     this.store_data.updateResetHome(true)
     this.router.navigate(['/basic-charting']);
     this.chartsComponent.destroyChart()
+    localStorage.setItem("us_stock", "false")
+
   }
   constructor(private store_data : StoreDataService,
     private chartsComponent: ChartsComponent,
@@ -24,10 +26,12 @@ export class HeaderComponent implements OnInit {
   }
   goToAdvanced(){
     console.log("Inside go to advanced")
+    localStorage.setItem("us_stock", "true")
     this.router.navigate(['/advanced-charting']);
   }
   goToBasic(){
     this.store_data.updateResetHome(true)
+    localStorage.setItem("us_stock", "false")
     this.router.navigate(['/basic-charting']);
     this.chartsComponent.destroyChart()
   }

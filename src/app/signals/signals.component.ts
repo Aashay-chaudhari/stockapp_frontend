@@ -36,14 +36,19 @@ export class SignalsComponent implements OnInit {
   }
 
   getDecimals(value:any){
+    console.log("Inside getDecimals", value)
     let buffer = value.toString()
     let buffer1 = buffer.split('.')
+    console.log("buffer1 is: ", buffer1)
+    if(buffer1.length == 1 || buffer1[1].length < 2){
+      return value
+    }
+    let buffer1_len = buffer1[1].length
     let decimalBuffer = buffer1[1].slice(0,2)
     let finalValue = buffer1[0] +'.'+ decimalBuffer
     let y:number = +finalValue
     return y;
 }
-
   seePredictions(){
     this.show_spinner = true;
     this.selected_symbol = localStorage.getItem('stock')
@@ -58,7 +63,8 @@ export class SignalsComponent implements OnInit {
       // let decimalBuffer = buffer1[1].slice(0,2)
       // let finalValue = buffer1[0] +'.'+ decimalBuffer
       // this.predictedValue = finalValue
-      this.predictedValue = this.getDecimals(response.predicted_price[0])
+      console.log("response is: ", response)
+      this.predictedValue = localStorage.getItem("pred_price")
       let response_data = response.response
       this.actual_values = response_data['actual']
       this.last_closing_price = this.getDecimals(this.actual_values[this.actual_values.length-1])
@@ -176,7 +182,7 @@ export class SignalsComponent implements OnInit {
                 
               },
               display: true,
-              text: "Nifty 50 Testing Chart",
+              text: "Model performance on "+ this.selected_symbol + " last 140 trading session",
             },
             tooltip : {
               enabled: true

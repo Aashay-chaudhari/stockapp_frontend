@@ -1,0 +1,51 @@
+<div>
+    <app-header></app-header>
+</div>
+
+<h3 style="text-align: center;">Stock : {{stock_name}}</h3>
+<div style="display: flex; justify-content: space-evenly; margin-bottom: 2%; margin-top: 2%;">
+  <div id="chart1" style="display: flex;">
+    <apx-chart
+      [series]="chartOptions1.series"
+      [chart]="chartOptions1.chart"
+      [xaxis]="chartOptions1.xaxis"
+      [yaxis]="chartOptions1.yaxis"
+      [title]="chartOptions1.title"
+      [tooltip]="chartOptions1.tooltip"
+    ></apx-chart>
+  </div>
+
+  <div id="chart2" style="display: flex;">
+    <apx-chart
+      [series]="chartOptions2.series"
+      [chart]="chartOptions2.chart"
+      [xaxis]="chartOptions2.xaxis"
+      [yaxis]="chartOptions2.yaxis"
+      [title]="chartOptions2.title"
+      [tooltip]="chartOptions2.tooltip"
+    ></apx-chart>
+  </div>
+  </div>
+  <div style="display: flex; justify-content: space-evenly;">
+  <div id="chart3" style="display: flex;">
+    <apx-chart
+      [series]="chartOptions3.series"
+      [chart]="chartOptions3.chart"
+      [xaxis]="chartOptions3.xaxis"
+      [yaxis]="chartOptions3.yaxis"
+      [title]="chartOptions3.title"
+      [tooltip]="chartOptions3.tooltip"
+    ></apx-chart>
+  </div>
+  <div id="chart4" style="display: flex;">
+    <apx-chart
+      [series]="chartOptions4.series"
+      [chart]="chartOptions4.chart"
+      [xaxis]="chartOptions4.xaxis"
+      [yaxis]="chartOptions4.yaxis"
+      [title]="chartOptions4.title"
+      [tooltip]="chartOptions4.tooltip"
+    ></apx-chart>
+  </div>
+</div>
+

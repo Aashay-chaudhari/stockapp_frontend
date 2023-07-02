@@ -2,10 +2,11 @@
 <div class="signal-outer-container">
     <div class="container">
         <div class="chart-container">
-            <canvas id="canvas2" height="200">{{chart2}}</canvas>
+            <canvas id="canvas2" height="350" width="500">{{chart2}}</canvas>
         </div>
         <div class="signal-container" *ngIf="!this.show_spinner">
             <div style="padding: 20px;font-size: 18px;">Last Closing Price: <span style="font-weight: 600;">{{last_closing_price}}</span></div>
+            <div style="padding: 20px;font-size: 18px;">Tomorrow's Opening Price: <span style="font-weight: 600;">{{predictedValue}}</span></div>
             <table style="width: 100%;" id="customers">
                 <th>
                     Moving Average

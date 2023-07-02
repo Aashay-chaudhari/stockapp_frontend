@@ -25,5 +25,8 @@ export class GetDataService {
     this.url = "http://127.0.0.1:8000/getNext30Days/"
     return this.httpClient.post(this.url, param);
   }
-
+  getSimilarCharts(param:any){
+    this.url = "http://127.0.0.1:8000/show_similar/"
+    return this.httpClient.post(this.url, param);
+  }
 }

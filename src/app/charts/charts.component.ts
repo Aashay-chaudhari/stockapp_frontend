@@ -6,6 +6,7 @@ import { StoreDataService } from 'src/services/store-data.service';
 import { HelloComponent } from './hello.component';
 import { Predict30Component } from '../predict30/predict30.component';
 import {ChartComponent,ApexAxisChartSeries,ApexChart,ApexYAxis,ApexXAxis,ApexTitleSubtitle} from "ng-apexcharts";
+import { Router } from '@angular/router';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -59,6 +60,7 @@ export class ChartsComponent implements OnInit {
   matDialogRef: any;
   constructor(private store_data: StoreDataService,
     private matDialog: MatDialog,
+    private router: Router,
     public Predict30Component: Predict30Component,
     private get_data : GetDataService) {
     Chart.register(...registerables);
@@ -562,7 +564,8 @@ export class ChartsComponent implements OnInit {
   predict(){
     this.show_spinner = true;
     let data= {
-      "symbol": this.stock_symbol
+      "symbol": this.stock_symbol,
+      "us_stock": false
     }
     console.log("Inside predict")
     this.get_data.predict(data).subscribe((response: any)=>{
@@ -570,6 +573,7 @@ export class ChartsComponent implements OnInit {
       console.log("data is: ", response)
       this.predicted_price = this.getDecimals(response.predicted_price[0])
       console.log("Predicted price is: ", this.predicted_price)
+      localStorage.setItem("pred_price", this.predicted_price)
       this.last_closing_price = this.getDecimals(this.filtered_close_price_array[this.filtered_close_price_array.length-1])
       console.log("last_closing_price is: ", this.last_closing_price)
       this.matDialogRef = this.matDialog.open(HelloComponent, {
@@ -590,12 +594,8 @@ export class ChartsComponent implements OnInit {
 
 
   }
-  predict30(){
-    this.store_data.updateShowPredicted30(true)
-    localStorage.setItem('stock_symbol', this.stock_symbol)
-    // this.destroyChart()
-    console.log("Inside predict30 and destroed the chart")
-    //this.Predict30Component.ngOnInit()
+  similar_charts(){
+    this.router.navigate(['/show-similar']);
   }
   getDecimals(value:any){
     console.log("Inside getDecimals", value)

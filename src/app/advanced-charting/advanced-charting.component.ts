@@ -4,6 +4,7 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { HelloComponent } from '../charts/hello.component';
 import { Chart, registerables } from 'chart.js';
 import { StoreDataService } from 'src/services/store-data.service';
+import { Router } from '@angular/router';
 
 declare const TradingView: any;
 
@@ -17,6 +18,7 @@ export class AdvancedChartingComponent implements OnInit {
 
   constructor(private get_data : GetDataService,
     private matDialog: MatDialog,
+    private router: Router,
     private store_data: StoreDataService,
     ) {
       Chart.register(...registerables);
@@ -70,21 +72,22 @@ export class AdvancedChartingComponent implements OnInit {
 
   predict(){
     this.show_spinner = true;
-    // this.store_data.updateShowPredicted(true)
-    // localStorage.setItem('stock_symbol', this.stock_symbol)
-    // this.destroyChart()
-    let data= {
-      "symbol": this.symbol
+    if(this.symbol==undefined){
+      this.symbol = "TSLA"
     }
-    console.log("Inside predict")
+    let data= {
+      "symbol": this.symbol,
+      "us_stock": true
+    }
+    console.log("Inside predict, data: ", data)
     this.get_data.predict(data).subscribe((response: any)=>{
       this.show_spinner= false;
       console.log("data is: ", response)
       this.predicted_price = this.getDecimals(response.predicted_price[0])
       console.log("Predicted pric eis: ", this.predicted_price)
       // this.last_closing_price = this.getDecimals(this.filtered_close_price_array[this.filtered_close_price_array.length-1])
-      this.last_closing_price = 50
-      console.log("last_closing_price eis: ", this.last_closing_price)
+      this.last_closing_price = this.getDecimals(response.last_closing_price)
+      console.log("last_closing_price eis: ", response.last_closing_price)
       this.matDialogRef = this.matDialog.open(HelloComponent, {
         data:{
           last_close_price : this.last_closing_price,
@@ -103,18 +106,19 @@ export class AdvancedChartingComponent implements OnInit {
 
 
   }
-  predict30(){
-    this.store_data.updateShowPredicted30(true)
-    localStorage.setItem('stock_symbol', this.symbol)
-    // this.destroyChart()
-    console.log("Inside predict30 and destroed the chart")
-    //this.Predict30Component.ngOnInit()
+  similar_charts(){
+    this.router.navigate(['/show-similar']);
   }
 
   getDecimals(value:any){
-    console.log("Inside getDecimals")
+    console.log("Inside getDecimals", value)
     let buffer = value.toString()
     let buffer1 = buffer.split('.')
+    console.log("buffer1 is: ", buffer1)
+    if(buffer1.length == 1 || buffer1[1].length < 2){
+      return value
+    }
+    let buffer1_len = buffer1[1].length
     let decimalBuffer = buffer1[1].slice(0,2)
     let finalValue = buffer1[0] +'.'+ decimalBuffer
     let y:number = +finalValue

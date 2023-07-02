@@ -1,11 +1,9 @@
 .signal-outer-container{
-    height: 90vh;
+    height: 85vh;
     /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
     box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.24);
 }
-.container{
-    margin: 20px;
-}
+
 .chart-container{
     width: 50%;
     margin-left : 18%;

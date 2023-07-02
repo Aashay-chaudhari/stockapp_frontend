@@ -66,7 +66,6 @@ export class AdvancedWatchlistComponent implements OnInit {
    return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
  }
  async getStockData(symbolName: any){
-   localStorage.clear()
    console.log("Symbol name is: ", symbolName)
    this.store_data.updateStockSearched(symbolName);
    localStorage.setItem('stock', symbolName)
