@@ -29,14 +29,14 @@ export class CreateUserComponent implements OnInit {
       }
       this.login.addUser(data).subscribe(response=>{
         console.log("Response is: ", response)
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       })
     }
 
   }
 
   redirectToSignIn(){
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
 
   }
 }

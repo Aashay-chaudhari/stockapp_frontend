@@ -13,7 +13,7 @@ import { ChartsComponent } from '../charts/charts.component';
 export class HeaderComponent implements OnInit {
   resetHome(){
     this.store_data.updateResetHome(true)
-    this.router.navigate(['/']);
+    this.router.navigate(['/basic-charting']);
     this.chartsComponent.destroyChart()
   }
   constructor(private store_data : StoreDataService,
@@ -24,11 +24,11 @@ export class HeaderComponent implements OnInit {
   }
   goToAdvanced(){
     console.log("Inside go to advanced")
-    this.router.navigate(['/advanced']);
+    this.router.navigate(['/advanced-charting']);
   }
   goToBasic(){
     this.store_data.updateResetHome(true)
-    this.router.navigate(['/']);
+    this.router.navigate(['/basic-charting']);
     this.chartsComponent.destroyChart()
   }
 }

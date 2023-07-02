@@ -5,10 +5,30 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+.guest-div{
+    margin-left: 20%;
+}
+.guest-div > button{
+    height: 45px;
+    width: 200px;
+    background-color: white;
+    border: none;
+    color: black;
+    box-shadow: 5px 5px 20px rgb(178, 178, 178);
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 600;
+    margin-right: 5%;
+}
+
+.guest-div > button:hover{
+    background-color: rgb(238, 235, 235);
+
+}
 .create-user-box{
     text-align: center;
     border-radius: 7px;
-    height: 50%;
+    height: 55%;
     min-width: 300px;
     width: 20%;
     box-shadow: 5px 5px 20px rgb(178, 178, 178);

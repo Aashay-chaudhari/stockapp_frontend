@@ -9,7 +9,7 @@
             <mat-label>Learning Rate</mat-label>
             <input matInput placeholder="0.01" formControlName="learning_rate">
             <mat-icon matSuffix>help</mat-icon>
-            <mat-hint>Hint</mat-hint>
+            <mat-hint>Determines the step size at each iteration while moving toward a minimum of a loss function</mat-hint>
           </mat-form-field>
     </div>
     <div>
@@ -17,7 +17,7 @@
     <mat-label>Batch Size</mat-label>
     <input matInput placeholder="64" formControlName="batch_size">
     <mat-icon matSuffix>help</mat-icon>
-    <mat-hint>Hint</mat-hint>
+    <mat-hint>Number of samples processed before the model is updated</mat-hint>
   </mat-form-field>
     </div>
     <div>
@@ -25,7 +25,7 @@
             <mat-label>Optimizer</mat-label>
             <input matInput placeholder="Adam" formControlName="optimizer">
             <mat-icon matSuffix>help</mat-icon>
-            <mat-hint>Hint</mat-hint>
+            <mat-hint>Algorithm or function that adapts the neural network's attributes, like learning rate and weights</mat-hint>
           </mat-form-field>
     </div>
     <div>
@@ -33,16 +33,18 @@
             <mat-label>Epochs</mat-label>
             <input matInput placeholder="50" formControlName="epochs">
             <mat-icon matSuffix>help</mat-icon>
-            <mat-hint>Hint</mat-hint>
+            <mat-hint>The total number of iterations of all the training data in one cycle for training the machine learning model</mat-hint>
           </mat-form-field>
     </div>
   </div>
 
     <div class="buttonContainer">
-      <button type="submit">Build</button>
+      <button type="submit" (click)="build_model()">Build</button>
 
     </div>
-      
+    <div class="error-class" *ngIf="show_err">
+      Model training queue is full right now. Please try building your model later.
+    </div>
 
       </form>
 

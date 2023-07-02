@@ -18,6 +18,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  guessLogin(){
+    this.router.navigate(['/basic-charting']);
+  }
+
   loginUser(){
     if(this.name.value == ''){
       this.errmsg = "The username can not be empty."
@@ -30,7 +34,7 @@ export class LoginComponent implements OnInit {
       }
       this.login.checkUser(data).subscribe(response=>{
         if(response=="Success"){
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/basic-charting']);
         }else{
           this.errmsg = "Login Failed. Please check your username and password."
         }

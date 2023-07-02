@@ -1,62 +1,12 @@
-<style>
-    .container{
-        height: 100vh;
-        display:flex;
-        align-items: center;
-        background-image: url('assets/bull.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-    .create-user-box{
-        text-align: center;
-        height: 65%;
-        border-radius: 7px;
-
-        width: 20%;
-        box-shadow: 5px 5px 20px darkcyan;
-        padding-top: 2%;
-        min-width: 300px;
-    }
-    .error-msg{
-        margin-top: 5%;
-        color: red;
-        font-size: 22px;
-    }
-    .logo{
-        height: 80%;
-        width: 20%;
-    }
-    input{
-        height: 8%;
-        width: 80%;
-        border-radius: 5px;
-        padding-left: 4%;
-        font-size:18px;
-    }
-    button{
-        border-radius: 5px;
-        width: 70%;
-        height: 8%;
-        background-color: #06283D;
-        color: white;
-        cursor: pointer;
-        font-size: 18px;
-    }
-    a{
-        color: blue;
-        font-weight: 600;
-    }
-</style>
-
 <div class="container">
     <div class="logo">
     </div>
     <div class="create-user-box">
         <img src="assets/logo1.png" style="height: 100px; width: 100px;border-radius: 50px;">
         <input style="margin-top:20%;" [formControl]="name" placeholder="Enter New Username"><br>
-        <input style="margin-top:15%;" [formControl]="pass" type="password" placeholder="Enter Password"><br>
+        <input style="margin-top:15%;" [formControl]="pass" type="password" placeholder="Enter New Password"><br>
         <button style="margin-top: 20%; margin-bottom: 5%;" (click)="createUser()">Sign Up</button><br>
-        <span style="font-size: 18px;color: white;">Already a user? <a href="">Sign in.</a></span>
+        <span style="font-size: 18px;color: black;">Already a user? <a href="">Sign in.</a></span>
         <div class="error-msg" *ngIf="errmsg!=''">{{ errmsg }}</div>
     </div>
 </div>

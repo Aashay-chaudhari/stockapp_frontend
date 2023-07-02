@@ -6,9 +6,12 @@
 
         <input style="margin-top:20%;" [formControl]="name" placeholder="Enter Username"><br>
         <input style="margin-top:15%;" [formControl]="pass" type="password" placeholder="Enter Password"><br>
-        <button style="margin-top: 20%; margin-bottom: 5%;" (click)="loginUser()">Login</button><br>
-        <span style="font-size: 18px; font-weight: 550;">Don't have an account? <a href="createUser">Sign up.</a></span>
+        <button style="margin-top: 20%; margin-bottom: 5%;" (click)="loginUser()">Login</button>
+        <div style="font-size: 18px; font-weight: 550;">Don't have an account? <a href="createUser">Sign up.</a></div>
         <div class="error-msg" *ngIf="errmsg!=''">{{ errmsg }}</div>
+    </div>
+    <div class="guest-div">
+        <button (click)="guessLogin()">Continue as Guest</button>
     </div>
 </div>
      

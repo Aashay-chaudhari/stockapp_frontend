@@ -7,7 +7,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./build.component.css']
 })
 export class BuildComponent implements OnInit {
-
+  show_err = false
   constructor() { }
 
   ngOnInit(): void {
@@ -18,4 +18,7 @@ export class BuildComponent implements OnInit {
     batch_size: new FormControl(''),
     optimizer: new FormControl('')
   });
+  build_model(){
+    this.show_err = true
+  }
 }

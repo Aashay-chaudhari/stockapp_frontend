@@ -8,10 +8,11 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { CheckingComponent } from './checking/checking.component';
 import { AdvancedChartingComponent } from './advanced-charting/advanced-charting.component';
+import { Login1Component } from './login1/login1.component';
 
 const routes: Routes = [
   {
-		path: '', component: HomeComponent,
+		path: '', component: LoginComponent,
 	},
 	{
 		path: 'check', component: CheckComponent,
@@ -23,10 +24,13 @@ const routes: Routes = [
 		path: 'dashboard', component: DashboardComponent,
 	},
 	{
-		path: 'advanced', component: AdvancedChartingComponent,
+		path: 'advanced-charting', component: AdvancedChartingComponent,
 	},
 	{
 		path: 'build', component: BuildComponent,
+	},
+	{
+		path: 'basic-charting', component: HomeComponent,
 	},
 ];
 

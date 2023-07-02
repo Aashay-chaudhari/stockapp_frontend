@@ -12,6 +12,7 @@
 .buttonContainer{
     display: flex;
     justify-content: center;
+    padding-top: 20px;
 }
 .divForm{
     padding-top: 50px;
@@ -35,4 +36,8 @@ button {
 button:hover{
     background-color: rgb(238, 235, 235);
 
+}
+.error-class{
+    margin-top: 50px;
+    text-align: center;
 }
