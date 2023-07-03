@@ -1,6 +1,7 @@
 <div>
     <app-header></app-header>
 </div>
+<mat-progress-bar mode="indeterminate" *ngIf="this.show_spinner"></mat-progress-bar>
 
 <h3 style="text-align: center;">Stock : {{stock_name}}</h3>
 <div style="display: flex; justify-content: space-evenly; margin-bottom: 2%; margin-top: 2%;">

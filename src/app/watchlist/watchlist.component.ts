@@ -22,7 +22,7 @@ export class WatchlistComponent implements OnInit {
   watchlist : string[]= []
 
   //Default watchlist
-  default_watchlist = [{symbolName : "RELIANCE"},{symbolName : "DMART"},{symbolName : "IGL"}]
+  default_watchlist = [{symbolName : "NESTLEIND"},{symbolName : "DMART"},{symbolName : "IGL"}]
 
   constructor(private store_data: StoreDataService,
     private chartComponent: ChartsComponent) {

@@ -33,6 +33,7 @@ export class SimilarChartsComponent implements OnInit {
   low_price_array: any;
   high_price_array: any;
   volume_array: any;
+  show_spinner = false;
   date_string_array: any;
   filtered_close_price_array: any;
   filtered_date_array: any;
@@ -82,6 +83,7 @@ export class SimilarChartsComponent implements OnInit {
     }
     this.date_array = []
     console.log("data is: ", data)
+    this.show_spinner = true
       this.get_data.getSimilarCharts(data).subscribe(response=>{
         console.log("Response from show similar: ", response)
         this.buffer_stock_data = response;
@@ -327,5 +329,6 @@ export class SimilarChartsComponent implements OnInit {
 
         };
       })
+    this.show_spinner = false
   }
 }
