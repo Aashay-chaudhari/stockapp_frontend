@@ -28,7 +28,7 @@
 .create-user-box{
     text-align: center;
     border-radius: 7px;
-    height: 55%;
+    height: 65%;
     min-width: 300px;
     width: 20%;
     box-shadow: 5px 5px 20px rgb(178, 178, 178);
@@ -41,7 +41,7 @@
 .error-msg{
     margin-top: 5%;
     color: red;
-    font-size: 22px;
+    font-size: 16px;
 }
 .logo{
     height: 80%;

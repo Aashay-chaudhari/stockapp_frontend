@@ -80,9 +80,14 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     margin-left: 50px;
   }
+  
 .information{
     width: 90%;
     padding-top: 5%;
     font-size: 20px;
     margin-left: 5%;
+}
+
+.login-dialog-container{
+    margin-left: 40%;
 }

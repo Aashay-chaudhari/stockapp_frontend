@@ -8,7 +8,6 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { CheckingComponent } from './checking/checking.component';
 import { AdvancedChartingComponent } from './advanced-charting/advanced-charting.component';
-import { Login1Component } from './login1/login1.component';
 import { SimilarChartsComponent } from './similar-charts/similar-charts.component';
 
 const routes: Routes = [

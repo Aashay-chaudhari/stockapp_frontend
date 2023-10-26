@@ -35,4 +35,9 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/basic-charting']);
     this.chartsComponent.destroyChart()
   }
+  logout(){
+    this.store_data.logout();
+    this.router.navigate(['/']);
+
+  }
 }

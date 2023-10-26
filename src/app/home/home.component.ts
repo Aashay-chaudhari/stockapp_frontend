@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/build']);
     
    }
+   
   ngOnInit(): void {
     this.store_data.reset_home.subscribe(response=>{
       console.log("Inside reset home ngoninit home")
@@ -33,8 +34,9 @@ export class HomeComponent implements OnInit {
       this.show_predict30 = false;
       this.show_signals = false;
       this.show_info = true;
-      this.stateChange();
+      // this.stateChange();
     })
+
     this.store_data.show_predictions.subscribe(response=>{
         this.show_predict = response;
         if(this.show_predict==true){
@@ -88,9 +90,9 @@ export class HomeComponent implements OnInit {
       }
     })
   }
-  stateChange() {
-      setTimeout(() => 
-      window.location.reload(), 500);
-  }
+  // stateChange() {
+  //     setTimeout(() => 
+  //     window.location.reload(), 500);
+  // }
 
 }

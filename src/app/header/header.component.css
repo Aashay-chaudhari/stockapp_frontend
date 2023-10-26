@@ -2,8 +2,10 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
     align-items: center;
-    height: 8vh;
+    height: 7.5vh;
     padding-left: 10vw;
+    padding-right: 10vw;
+    
     justify-content: start;
 }
 #header-img{
@@ -30,9 +32,18 @@
     cursor: pointer;
     border-radius: 5px;
     font-weight: 600;
-    margin-right: 5%;
 }
 .buttons-container > button:hover{
     background-color: rgb(238, 235, 235);
 
+}
+.logout-button{
+    height: 35px;
+    width: 100px;
+    background-color: white;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 600;
 }

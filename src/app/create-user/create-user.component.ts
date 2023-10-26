@@ -17,19 +17,33 @@ export class CreateUserComponent implements OnInit {
   errmsg = ''
   ngOnInit(): void {
   }
+  
+  check_email_validity(){
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return (this.name.value && emailPattern.test(this.name.value)) 
+  }
+
   createUser(){
-    if(this.name.value == ''){
+    if(!this.check_email_validity()){
+      this.errmsg = "Please enter valid email address."
+    }
+    else if(this.name.value == ''){
       this.errmsg = "The username can not be empty."
     }else if(this.pass.value == ''){
       this.errmsg = "The password can not be empty."
     }else{
       let data = {
-        "name" : this.name.value,
+        "email" : this.name.value,
         "password" : this.pass.value
       }
       this.login.addUser(data).subscribe(response=>{
-        console.log("Response is: ", response)
-        this.router.navigate(['/']);
+        if(response=='Email'){
+          this.errmsg = "The email is already associated with an account."
+        }
+        else{
+          console.log("Response is: ", response)
+          this.router.navigate(['/']);
+        }
       })
     }
 

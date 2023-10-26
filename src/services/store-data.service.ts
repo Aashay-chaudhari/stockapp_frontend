@@ -12,6 +12,21 @@ export class StoreDataService {
   advanced_stock_searched = new Subject();
   show_signal = new Subject<boolean>();
   reset_home = new Subject<boolean>();
+
+  access_token : String = 'none';
+  user_name : String = 'none';
+
+  setCreds(access_token: string, user_name: string){
+    this.access_token = access_token;
+    this.user_name = user_name;
+  }
+
+  logout(){
+    this.access_token = 'none';
+    this.user_name = 'none'; 
+  }
+
+
   updateStockSearched(stockSymbol: string){
     this.stock_searched.next(stockSymbol);
   }

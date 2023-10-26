@@ -7,6 +7,8 @@ import { HelloComponent } from './hello.component';
 import { Predict30Component } from '../predict30/predict30.component';
 import {ChartComponent,ApexAxisChartSeries,ApexChart,ApexYAxis,ApexXAxis,ApexTitleSubtitle} from "ng-apexcharts";
 import { Router } from '@angular/router';
+import { LoginRedirectComponent } from './loginredirect.component';
+
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -561,41 +563,77 @@ export class ChartsComponent implements OnInit {
       this.matboxChecked = false;
     }
   }
-  predict(){
-    this.show_spinner = true;
-    let data= {
-      "symbol": this.stock_symbol,
-      "us_stock": false
-    }
-    console.log("Inside predict")
-    this.get_data.predict(data).subscribe((response: any)=>{
-      this.show_spinner= false;
-      console.log("data is: ", response)
-      this.predicted_price = this.getDecimals(response.predicted_price[0])
-      console.log("Predicted price is: ", this.predicted_price)
-      localStorage.setItem("pred_price", this.predicted_price)
-      this.last_closing_price = this.getDecimals(this.filtered_close_price_array[this.filtered_close_price_array.length-1])
-      console.log("last_closing_price is: ", this.last_closing_price)
-      this.matDialogRef = this.matDialog.open(HelloComponent, {
-        data:{
-          last_close_price : this.last_closing_price,
-          predicted_close_price: this.predicted_price,
-          point_movement: this.getDecimals(Math.abs(this.last_closing_price - this.predicted_price)),
-          ROI: this.getDecimals(Math.abs(this.last_closing_price - this.predicted_price)*100/this.last_closing_price),
-        },
-        hasBackdrop: false,
-      });
-      this.matDialogRef.updatePosition({ top: '22vh', left: '16vw' });
-      this.matDialogRef.afterClosed().subscribe((res: boolean) => {
-        if ((res == true)) {
-        }
-      });
-    })
-
-
+  
+  redirect_to_login(){
+    this.matDialogRef = this.matDialog.open(LoginRedirectComponent, {
+      hasBackdrop: true,
+    });
+    this.matDialogRef.updatePosition({ top: '22vh', left: '16vw' });
+    this.matDialogRef.afterClosed().subscribe((res: boolean) => {
+      if ((res == true)) {
+      }
+    });
   }
+
+  predict(){
+    var access_key = this.store_data.access_token
+    var user_name = this.store_data.user_name
+    
+    console.log("accesskey, username: ", access_key, user_name)
+    if (access_key == 'none' || user_name == 'none'){
+      this.redirect_to_login()
+    }
+    else{
+      this.show_spinner = true;
+      let data= {
+        "symbol": this.stock_symbol,
+        "us_stock": false,
+        "access_key" : access_key,
+        "user_name" : user_name
+      }
+
+      console.log("Inside predict")
+      this.get_data.predict(data).subscribe((response: any)=>{
+        if(response == 'login required'){
+          this.redirect_to_login()
+        }
+        this.show_spinner= false;
+        console.log("data is: ", response)
+        this.predicted_price = this.getDecimals(response.predicted_price[0])
+        console.log("Predicted price is: ", this.predicted_price)
+        localStorage.setItem("pred_price", this.predicted_price)
+        this.last_closing_price = this.getDecimals(this.filtered_close_price_array[this.filtered_close_price_array.length-1])
+        console.log("last_closing_price is: ", this.last_closing_price)
+        this.matDialogRef = this.matDialog.open(HelloComponent, {
+          data:{
+            last_close_price : this.last_closing_price,
+            predicted_close_price: this.predicted_price,
+            point_movement: this.getDecimals(Math.abs(this.last_closing_price - this.predicted_price)),
+            ROI: this.getDecimals(Math.abs(this.last_closing_price - this.predicted_price)*100/this.last_closing_price),
+          },
+          hasBackdrop: false,
+        });
+        this.matDialogRef.updatePosition({ top: '22vh', left: '16vw' });
+        this.matDialogRef.afterClosed().subscribe((res: boolean) => {
+          if ((res == true)) {
+          }
+        });
+      })
+    }
+  }
+
+
   similar_charts(){
-    this.router.navigate(['/show-similar']);
+    var access_key = this.store_data.access_token
+    var user_name = this.store_data.user_name
+    
+    console.log("accesskey, username: ", access_key, user_name)
+    if (access_key == 'none' || user_name == 'none'){
+      this.redirect_to_login()
+    }
+    else{
+      this.router.navigate(['/show-similar']);
+    }
   }
   getDecimals(value:any){
     console.log("Inside getDecimals", value)

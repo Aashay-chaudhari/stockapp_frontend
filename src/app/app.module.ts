@@ -30,7 +30,6 @@ import { NgApexchartsModule } from "ng-apexcharts";
 import { CheckingComponent } from './checking/checking.component';
 import { AdvancedChartingComponent } from './advanced-charting/advanced-charting.component';
 import { AdvancedWatchlistComponent } from './advanced-watchlist/advanced-watchlist.component';
-import { Login1Component } from './login1/login1.component';
 import { SimilarChartsComponent } from './similar-charts/similar-charts.component';
 
 @NgModule({
@@ -52,7 +51,6 @@ import { SimilarChartsComponent } from './similar-charts/similar-charts.componen
     CheckingComponent,
     AdvancedChartingComponent,
     AdvancedWatchlistComponent,
-    Login1Component,
     SimilarChartsComponent,
   ],
   imports: [
